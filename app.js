@@ -5,6 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
+var dui = require('./routes/ui');
 var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
@@ -25,7 +26,6 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(auth);
 
 // development only
 if ('development' == app.get('env')) {
@@ -33,10 +33,15 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/',routes.index);
+app.get('/ui',dui.index);
 app.get('/login', user.login);
 app.post('/login', user.signin);
 
 db.sequelize.sync().complete(function(err) {
+  db.User.find({where:{username: "vagmi"}}).then(function(user) {
+    if(!user)
+      db.User.create({username:"vagmi",password:"password"})
+  });
   if(err) {
     throw err;
   } else {
