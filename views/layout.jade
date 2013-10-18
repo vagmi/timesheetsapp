@@ -1,0 +1,22 @@
+doctype 5
+html
+  head
+    title Timesheets App
+    link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        .navbar-header
+          a.navbar-brand(href="/") JS Timesheets
+        nav
+          - if(currentUser)
+            ul.nav.navbar-nav
+              li.active
+                a(href="#/time") Time
+              li
+                a(href="#/clients") Clients
+              li
+                a(href="#/projects") Projects
+    .container
+      block content

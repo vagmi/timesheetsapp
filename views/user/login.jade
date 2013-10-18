@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+  form.form-inline(action="/login", method="post", role="form")
+    - if(message)
+      .alert.alert-danger= message
+    .form-group
+      label.sr-only Username
+      input.form-control(type="text", placeholder="username", name="username")
+    .form-group
+      label.sr-only Password
+      input.form-control(type="password", placeholder="password", name="password")
+    .form-group
+      input.btn.btn-primary(type="submit", value="login")
